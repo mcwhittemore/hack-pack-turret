@@ -1,133 +1,99 @@
+#define BUFFER_LENGTH 32
+char inputBuffer[BUFFER_LENGTH]; // Buffer to store incoming IR command as a string
+int bufferIndex = 0; // Current index in the input buffer
+
+bool addToInputBuffer(char c) {
+    if (bufferIndex < BUFFER_LENGTH - 1) { // Leave space for null terminator
+        inputBuffer[bufferIndex++] = c;
+        inputBuffer[bufferIndex] = '\0'; // Null-terminate the string
+        Serial.print("Input Buffer: ");
+        Serial.println(inputBuffer);
+        return true;
+    } else {
+        Serial.println("Input buffer full, cannot add more characters.");
+        return false;
+    }
+}
+
+char commandToCharacter(int command) {
+    switch (command) {
+        case up:
+          return 'U';
+        case down:
+          return 'D';
+        case left:
+          return 'L';
+        case right:
+          return 'R';
+        case ok:
+          return 'K';
+        case star:
+          return '*';
+        case cmd1:
+          return '1';
+        case cmd2:
+          return '2';
+        case cmd3:
+          return '3';
+        case cmd4:
+          return '4';
+        case cmd5:
+          return '5';
+        case cmd6:
+          return '6';
+        case cmd7:
+          return '7';
+        case cmd8:
+          return '8';
+        case cmd9:
+          return '9';
+        case cmd0:
+          return '0';
+        default:
+          return '\0'; // Return null character for unrecognized commands
+    }
+}
+
 void handleCommand(int command) {
     // this checks to see if the command is a repeat
-    if((IrReceiver.decodedIRData.flags & IRDATA_FLAGS_IS_REPEAT) && !passcodeEntered) { 
+    if((IrReceiver.decodedIRData.flags & IRDATA_FLAGS_IS_REPEAT) && mode != DIRECT_MODE) { 
       Serial.println("DEBOUNCING REPEATED NUMBER - IGNORING INPUT");
       return; //discarding the repeated numbers prevent you from accidentally inputting a number twice
     }
 
-    switch (command) {
-        case up:
-            if (passcodeEntered) {
-                // Handle up command
-                upMove(1);
-            } else {
-                //shakeHeadNo();
-            }
-            break;
-
-        case down:
-            if (passcodeEntered) {
-                // Handle down command
-                downMove(1);
-            } else {
-                //shakeHeadNo();
-            }
-            break;
-
-        case left:
-            if (passcodeEntered) {
-                // Handle left command
-                leftMove(1);
-            } else {
-                //shakeHeadNo();
-            }
-            break;
-
-        case right:
-            if (passcodeEntered) {
-              // Handle right command
-              rightMove(1);
-            } else {
-                //shakeHeadNo();
-            }
-            break;
-
-        case ok:
-            if (passcodeEntered) {
-                // Handle fire command
-                fire();
-                Serial.println("FIRE");
-            } else {
-                //shakeHeadNo();
-            }
-            break;
-
-        case star:
-            if (passcodeEntered) {
-              Serial.println("LOCKING");
-                // Return to locked mode
-                passcodeEntered = false;
-            } else {
-                //shakeHeadNo();
-            }
-            break;
-
-        case cmd1: // Add digit 1 to passcode
-            if (!passcodeEntered) {
-                addPasscodeDigit('1');
-            }
-            break;
-
-        case cmd2: // Add digit 2 to passcode
-            if (!passcodeEntered) {
-                addPasscodeDigit('2');
-            }
-            break;
-
-        case cmd3: // Add digit 3 to passcode
-            if (!passcodeEntered) {
-                addPasscodeDigit('3');
-            }
-            break;
-
-        case cmd4: // Add digit 4 to passcode
-            if (!passcodeEntered) {
-                addPasscodeDigit('4');
-            }
-            break;
-
-        case cmd5: // Add digit 5 to passcode
-            if (!passcodeEntered) {
-                addPasscodeDigit('5');
-            }
-            break;
-
-        case cmd6: // Add digit 6 to passcode
-            if (!passcodeEntered) {
-                addPasscodeDigit('6');
-            }
-            break;
-
-        case cmd7: // Add digit 7 to passcode
-            if (!passcodeEntered) {
-                addPasscodeDigit('7');
-            }
-            break;
-
-        case cmd8: // Add digit 8 to passcode
-            if (!passcodeEntered) {
-                addPasscodeDigit('8');
-            }
-            break;
-
-        case cmd9: // Add digit 9 to passcode
-            if (!passcodeEntered) {
-                addPasscodeDigit('9');
-            }
-            break;
-
-        case cmd0: // Add digit 0 to passcode
-            if (!passcodeEntered) {
-                addPasscodeDigit('0');
-            }
-            break;
-
-        default:
-            // Unknown command, do nothing
-            Serial.println("Command Read Failed or Unknown, Try Again");
-            break;
+    char toAdd = commandToCharacter(command);
+    bool added = addToInputBuffer(toAdd);
+    if (!added) {
+        Serial.println("Failed to add command to input buffer.");
+        shakeHeadNo();
+        bufferIndex = 0; // Reset buffer index
+        inputBuffer[0] = '\0'; // Clear the input buffer
+        return;
     }
-    if (strlen(passcode) == PASSCODE_LENGTH){
-        checkPasscode();
+
+    int modeResult = 0;
+    if (mode == PASSWORD_MODE) {
+        modeResult = handlePasswordMode();
+    } else if (mode == DIRECT_MODE) {
+        modeResult = handleDirectMode();
+    } else {
+        Serial.println("Unknown mode, cannot handle command.");
+        shakeHeadNo();
+        mode = PASSWORD_MODE; // Reset to a known mode
+    }
+
+    if (modeResult == -1) {
+        Serial.println("Error handling command, resetting buffer.");
+        shakeHeadNo();
+        bufferIndex = 0; // Reset buffer index
+        inputBuffer[0] = '\0'; // Clear the input buffer
+    } else if (modeResult >= 1) {
+        Serial.println("Command handled successfully, resetting buffer.");
+        bufferIndex = 0; // Reset buffer index
+        inputBuffer[0] = '\0'; // Clear the input buffer
+        mode = modeResult; // Switch to the new mode if applicable
+    } else {
+        Serial.println("Awaiting more input...");
     }
 }
+

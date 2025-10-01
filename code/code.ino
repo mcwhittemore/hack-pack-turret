@@ -6,8 +6,10 @@
 #include <IRremote.hpp>
 #include "./ir-codes.h"
 #include "./movement.h"
-#include "./passcode.h"
+#include "./mode-defs.h"
 #include "./commands.h"
+#include "./passcode.h"
+#include "./direct-mode.h"
 
 //////////////////////////////////////////////////
                 //  S E T U P  //
