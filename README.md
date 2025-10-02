@@ -4,13 +4,13 @@ This repo contains my copy of code from the [Crunchlabs Turret Hack Pack](https:
 
 # Purpose
 
-The goal of this project is to update the original code to be simplier to extend and modify by standardizing input management and "mode" selection and creating a framework for how to add new modes that use this input management system.
+The goal of this project is to update the original code to be simpler to extend and modify by standardizing input management and "mode" selection and creating a framework for how to add new modes that use this input management system.
 
 # Adding a mode
 
-## Step 1: Register new mode with `./code/mode-def.h`
+## Step 1: Register new mode with `./code/mode-defs.h`
 
-You need to add both a `#define` for your mode like `#define JUST_SAY_NO_MODE 1`. All the modes must be in order and the first mode must be 1. You also need to define the name of your mode "handler" like `int handleJustSayNo();`. 
+You need to add both a `#define` for your mode like `#define JUST_SAY_NO_MODE 1`. All the modes must be in order and the first mode must be 1. You also need to define the name of your mode "handler" like `int handleJustSayNo();`.
 
 ## Step 2: Implement logic in new `code/*-mode.h` file
 
@@ -27,7 +27,7 @@ Note: The name of the function here does not matter. It can be whatever you want
 
 ## Step 3: Register your mode in `./code/commands.h`
 
-You need to both add an `#include` for your new mode file and add an if block to the mode handler list.
+You need to add both an `#include` for your new mode file and an if block to the mode handler list.
 
 ```c
 #include "./just-say-no-mode.h"
