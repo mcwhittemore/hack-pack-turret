@@ -79,7 +79,7 @@ void fire() { //function for firing a single dart
 
 void fireAll() { //function to fire all 6 darts at once
     rollServo.write(rollStopSpeed + rollMoveSpeed);//start rotating the servo
-    delay(rollPrecision * 6); //time for 360 degrees of rotation
+    delay(rollPrecision * 12); //time for 360 degrees of rotation
     rollServo.write(rollStopSpeed);//stop rotating the servo
     delay(5); // delay for smoothness
     Serial.println("FIRING ALL");

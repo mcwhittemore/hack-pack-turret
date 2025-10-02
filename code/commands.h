@@ -29,6 +29,8 @@ char commandToCharacter(int command) {
           return 'K';
         case star:
           return '*';
+        case hashtag:
+          return '#';
         case cmd1:
           return '1';
         case cmd2:
@@ -88,6 +90,8 @@ void handleCommand(int command) {
         modeResult = handlePasswordMode();
     } else if (mode == DIRECT_MODE) {
         modeResult = handleDirectMode();
+    } else if (mode == JUST_NO_MODE) {
+        modeResult = handleJustNoMode();
     } else {
         Serial.println("Unknown mode, cannot handle command.");
         shakeHeadNo();

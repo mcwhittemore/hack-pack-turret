@@ -21,8 +21,9 @@ int handleDirectMode() {
       return -1;
     case '*':
       return PASSWORD_MODE;
+    case '#':
+      return JUST_NO_MODE;
     default:
-      shakeHeadNo();
       return -1;
   }
 }
