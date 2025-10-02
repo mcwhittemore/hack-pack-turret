@@ -99,7 +99,7 @@ void handleCommand(int command) {
         bufferIndex = 0; // Reset buffer index
         inputBuffer[0] = '\0'; // Clear the input buffer
     } else if (modeResult >= 1) {
-        Serial.println("Command handled successfully, resetting buffer.");
+        Serial.println("Switching to next mode.");
         bufferIndex = 0; // Reset buffer index
         inputBuffer[0] = '\0'; // Clear the input buffer
         mode = modeResult; // Switch to the new mode if applicable
