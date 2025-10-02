@@ -92,6 +92,8 @@ void handleCommand(int command) {
         modeResult = handleDirectMode();
     } else if (mode == JUST_NO_MODE) {
         modeResult = handleJustNoMode();
+    } else if (mode == OPPISITE_MODE) {
+        modeResult = handleOppisiteMode();
     } else {
         Serial.println("Unknown mode, cannot handle command.");
         shakeHeadNo();
