@@ -8,6 +8,9 @@ compile:
 
 upload:
 	arduino-cli upload -p $(PORT) --fqbn $(FQBN) code
+
+log:
+	arduino-cli monitor -p $(PORT) --fqbn $(FQBN)
 	
 install:
 	arduino-cli lib download Servo

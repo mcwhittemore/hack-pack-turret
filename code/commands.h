@@ -54,9 +54,21 @@ char commandToCharacter(int command) {
     }
 }
 
+bool isCommandADirection(int command) {
+  switch (command) {
+    case up:
+    case down:
+    case left:
+    case right:
+      return true;
+    default:
+      return false;
+  }
+}
+
 void handleCommand(int command) {
     // this checks to see if the command is a repeat
-    if((IrReceiver.decodedIRData.flags & IRDATA_FLAGS_IS_REPEAT) && mode != DIRECT_MODE) { 
+    if((IrReceiver.decodedIRData.flags & IRDATA_FLAGS_IS_REPEAT) && !isCommandADirection(command)) { 
       Serial.println("DEBOUNCING REPEATED NUMBER - IGNORING INPUT");
       return; //discarding the repeated numbers prevent you from accidentally inputting a number twice
     }
@@ -83,8 +95,7 @@ void handleCommand(int command) {
     }
 
     if (modeResult == -1) {
-        Serial.println("Error handling command, resetting buffer.");
-        shakeHeadNo();
+        Serial.println("Complete. Resetting buffer.");
         bufferIndex = 0; // Reset buffer index
         inputBuffer[0] = '\0'; // Clear the input buffer
     } else if (modeResult >= 1) {
