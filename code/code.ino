@@ -11,6 +11,7 @@
 #include "./password-mode.h"
 #include "./direct-mode.h"
 #include "./just-no-mode.h"
+#include "./oppisite-mode.h"
 
 //////////////////////////////////////////////////
                 //  S E T U P  //

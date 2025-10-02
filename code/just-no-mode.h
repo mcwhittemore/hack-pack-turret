@@ -5,7 +5,7 @@ int handleJustNoMode() {
   }
 
   if (strcmp(inputBuffer, "#") == 0) {
-    return DIRECT_MODE;
+    return OPPISITE_MODE;
   }
 
   shakeHeadNo();
