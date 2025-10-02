@@ -10,6 +10,7 @@
 #include "./commands.h"
 #include "./password-mode.h"
 #include "./direct-mode.h"
+#include "./just-no-mode.h"
 
 //////////////////////////////////////////////////
                 //  S E T U P  //
