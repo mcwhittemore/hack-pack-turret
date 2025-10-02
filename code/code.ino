@@ -8,7 +8,7 @@
 #include "./movement.h"
 #include "./mode-defs.h"
 #include "./commands.h"
-#include "./passcode.h"
+#include "./password-mode.h"
 #include "./direct-mode.h"
 
 //////////////////////////////////////////////////
