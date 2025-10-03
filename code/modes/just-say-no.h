@@ -1,4 +1,4 @@
 bool handleJustNoMode() {
   shakeHeadNo();
-  return CLEAN_INPUT_BUFFER;
+  return CLEAR_INPUT_BUFFER;
 }

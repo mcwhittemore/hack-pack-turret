@@ -1,6 +1,6 @@
 typedef bool (*FunctionPtr)();
 
-#define CLEAN_INPUT_BUFFER true
+#define CLEAR_INPUT_BUFFER true
 #define KEEP_INPUT_BUFFER false
 
 #define MAX_MODES 20
