@@ -15,6 +15,7 @@ log:
 format:
 	clang-format -i code/*.h
 	clang-format -i code/**/*.h
+	clang-format -i code/code.ino
 
 format-check: format
 	git diff --exit-code
