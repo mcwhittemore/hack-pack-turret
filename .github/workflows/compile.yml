@@ -4,6 +4,21 @@ on:
   pull_request:
 
 jobs:
+  format:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Install Clang
+        run: |
+          sudo apt update
+          sudo apt install clang-format
+
+      - name: clang-format check
+        run: make format-check
+
   compile:
     runs-on: ubuntu-latest
 

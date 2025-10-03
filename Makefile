@@ -1,7 +1,7 @@
 FQBN=arduino:avr:nano
 PORT=/dev/cu.usbserial-110
 
-all: compile upload
+all: format compile upload
 
 compile:
 	arduino-cli compile --fqbn $(FQBN) code
@@ -11,6 +11,14 @@ upload:
 
 log:
 	arduino-cli monitor -p $(PORT) --fqbn $(FQBN)
+
+format:
+	clang-format -i code/*.h
+	clang-format -i code/**/*.h
+	clang-format -i code/code.ino
+
+format-check: format
+	git diff --exit-code
 	
 install:
 	arduino-cli lib download Servo

@@ -1,9 +1,10 @@
 //////////////////////////////////////////////////
-                //  LIBRARIES  //
+//  LIBRARIES  //
 //////////////////////////////////////////////////
 #include <Arduino.h>
 #include <Servo.h>
 #include <IRremote.hpp>
+
 #include "./ir-codes.h"
 #include "./movement.h"
 #include "./mode-mgmt.h"
@@ -11,22 +12,23 @@
 #include "./modes.h"
 
 //////////////////////////////////////////////////
-                //  S E T U P  //
+//  S E T U P  //
 //////////////////////////////////////////////////
 
-// this is our setup function - it runs once on start up, 
+// this is our setup function - it runs once on start up,
 // and is basically where we get everything "set up"
-void setup() { 
-  // initializes the Serial communication between the 
+void setup() {
+  // initializes the Serial communication between the
   // computer and the microcontroller
-  Serial.begin(9600); 
+  Serial.begin(9600);
 
-  yawServo.attach(10); //attach YAW servo to pin 10
-  pitchServo.attach(11); //attach PITCH servo to pin 11
-  rollServo.attach(12); //attach ROLL servo to pin 12
+  yawServo.attach(10);   // attach YAW servo to pin 10
+  pitchServo.attach(11); // attach PITCH servo to pin 11
+  rollServo.attach(12);  // attach ROLL servo to pin 12
 
   // Just to know which program is running on my microcontroller
-  Serial.println(F("START " __FILE__ " from " __DATE__ "\r\nUsing library version " VERSION_IRREMOTE));
+  Serial.println(F("START " __FILE__ " from " __DATE__
+                   "\r\nUsing library version " VERSION_IRREMOTE));
 
   // Start the receiver and if not 3. parameter specified,
   // take LED_BUILTIN pin from the internal boards
@@ -37,19 +39,20 @@ void setup() {
   printActiveIRProtocols(&Serial);
   Serial.println(F("at pin 9"));
 
-  homeServos(); //set servo motors to home position
-  
+  homeServos(); // set servo motors to home position
+
   processModeRegistration();
 }
 
 //////////////////////////////////////////////////
-                //  L O O P  //
+//  L O O P  //
 //////////////////////////////////////////////////
 void loop() {
-    if (IrReceiver.decode()) { //if we have recieved a comman this loop...
-        int command = IrReceiver.decodedIRData.command; //store it in a variable
-        IrReceiver.resume(); // Enable receiving of the next value
-        handleCommand(command); // Handle the received command through switch statements
-    }
-    delay(5); //delay for smoothness
+  if (IrReceiver.decode()) { // if we have recieved a comman this loop...
+    int command = IrReceiver.decodedIRData.command; // store it in a variable
+    IrReceiver.resume(); // Enable receiving of the next value
+    handleCommand(
+        command); // Handle the received command through switch statements
+  }
+  delay(5); // delay for smoothness
 }
