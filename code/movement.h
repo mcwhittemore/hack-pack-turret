@@ -2,9 +2,9 @@ Servo yawServo; // names the servo responsible for YAW rotation, 360 spin around
                 // the base
 Servo pitchServo; // names the servo responsible for PITCH rotation, up and down
                   // tilt
-Servo rollServo; // names the servo responsible for ROLL rotation, spins the
-                 // barrel to fire darts
-                 //
+Servo rollServo;  // names the servo responsible for ROLL rotation, spins the
+                  // barrel to fire darts
+                  //
 int rollServoVal = 90;
 
 int lastYawServoVal =

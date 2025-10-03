@@ -11,6 +11,13 @@ upload:
 
 log:
 	arduino-cli monitor -p $(PORT) --fqbn $(FQBN)
+
+format:
+	clang-format -i code/*.h
+	clang-format -i code/**/*.h
+
+format-check: format
+	git diff --exit-code
 	
 install:
 	arduino-cli lib download Servo
