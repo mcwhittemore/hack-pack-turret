@@ -17,11 +17,11 @@ bool checkPasscode() {
   if (strcmp(inputBuffer, CORRECT_PASSCODE) == 0) {
     shakeHeadYes();
     passcodeEntered = true;
-    return CLEAN_INPUT_BUFFER;
+    return CLEAR_INPUT_BUFFER;
   } else {
     shakeHeadNo();
     passcodeEntered = false;
-    return CLEAN_INPUT_BUFFER;
+    return CLEAR_INPUT_BUFFER;
   }
 }
 
@@ -48,7 +48,7 @@ void handleCommand(int command) {
         return;
     }
 
-    bool modeResult = CLEAN_INPUT_BUFFER;
+    bool modeResult = CLEAR_INPUT_BUFFER;
     if (!passcodeEntered) {
         modeResult = checkPasscode();
     } 
@@ -60,14 +60,14 @@ void handleCommand(int command) {
       }
     }
     else if (inputBuffer[bufferIndex-1] == '*') {
-      modeResult = CLEAN_INPUT_BUFFER;
+      modeResult = CLEAR_INPUT_BUFFER;
       passcodeEntered = false;
     }
     else {
         modeResult = runActiveMode();
     }
 
-    if (modeResult == CLEAN_INPUT_BUFFER) {
+    if (modeResult == CLEAR_INPUT_BUFFER) {
         Serial.println("Complete. Resetting buffer.");
         bufferIndex = 0; // Reset buffer index
         inputBuffer[0] = '\0'; // Clear the input buffer
