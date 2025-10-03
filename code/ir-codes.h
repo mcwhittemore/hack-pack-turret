@@ -1,16 +1,19 @@
 //////////////////////////////////////////////////
-               //  IR CODES  //
+//  IR CODES  //
 //////////////////////////////////////////////////
 /*
-** if you want to add other remotes (as long as they're on the same protocol above):
-** press the desired button and look for a hex code similar to those below (ex: 0x11)
+** if you want to add other remotes (as long as they're on the same protocol
+* above):
+** press the desired button and look for a hex code similar to those below (ex:
+* 0x11)
 ** then add a new line to #define newCmdName 0x11,
-** and add a case to the switch statement like case newCmdName: 
+** and add a case to the switch statement like case newCmdName:
 ** this will let you add new functions to buttons on other remotes!
-** the best remotes to try are cheap LED remotes, some TV remotes, and some garage door openers
+** the best remotes to try are cheap LED remotes, some TV remotes, and some
+* garage door openers
 */
 
-//defines the specific command code for each button on the remote
+// defines the specific command code for each button on the remote
 #define left 0x8
 #define right 0x5A
 #define up 0x18
@@ -29,4 +32,6 @@
 #define star 0x16
 #define hashtag 0xD
 
-#define DECODE_NEC  //defines the type of IR transmission to decode based on the remote. See IRremote library for examples on how to decode other types of remote
+#define DECODE_NEC // defines the type of IR transmission to decode based on the
+                   // remote. See IRremote library for examples on how to decode
+                   // other types of remote

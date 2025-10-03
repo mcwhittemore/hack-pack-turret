@@ -1,26 +1,26 @@
 
 int handleOppositeMode() {
   switch (inputBuffer[0]) {
-    case 'R':
-      leftMove(1);
-      return CLEAR_INPUT_BUFFER;
-    case 'L':
-      rightMove(1);
-      return CLEAR_INPUT_BUFFER;
-    case 'D':
-      upMove(1);
-      return CLEAR_INPUT_BUFFER;
-    case 'U':
-      downMove(1);
-      return CLEAR_INPUT_BUFFER;
-    case 'K':
-      rightMove(12);
-      fire();
-      return CLEAR_INPUT_BUFFER;
-    case '1234567890':
-      fireAll();
-      return CLEAR_INPUT_BUFFER;
-    default:
-      return CLEAR_INPUT_BUFFER;
+  case 'R':
+    leftMove(1);
+    return CLEAR_INPUT_BUFFER;
+  case 'L':
+    rightMove(1);
+    return CLEAR_INPUT_BUFFER;
+  case 'D':
+    upMove(1);
+    return CLEAR_INPUT_BUFFER;
+  case 'U':
+    downMove(1);
+    return CLEAR_INPUT_BUFFER;
+  case 'K':
+    rightMove(12);
+    fire();
+    return CLEAR_INPUT_BUFFER;
+  case '1234567890':
+    fireAll();
+    return CLEAR_INPUT_BUFFER;
+  default:
+    return CLEAR_INPUT_BUFFER;
   }
 }
