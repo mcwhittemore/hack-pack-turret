@@ -28,10 +28,10 @@ bool runActiveMode() {
   return modeHandlers[activeMode]();
 }
 
-bool setMode(char* inputBuffer) {
+bool setMode(char *inputBuffer) {
   int inputLen = strlen(inputBuffer);
   char hold[inputLen + 1];
-  for(int i = 1; i < inputLen-1; i++) {
+  for (int i = 1; i < inputLen - 1; i++) {
     hold[i - 1] = inputBuffer[i];
   }
   int mode = atoi(hold) - 1;
