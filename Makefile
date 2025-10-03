@@ -1,7 +1,7 @@
 FQBN=arduino:avr:nano
 PORT=/dev/cu.usbserial-110
 
-all: compile upload
+all: format compile upload
 
 compile:
 	arduino-cli compile --fqbn $(FQBN) code
