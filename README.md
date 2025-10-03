@@ -18,7 +18,8 @@ To change modes press `#` and then enter the mode number in and follow it with a
 
 1. **Direct Mode**: Basic control. Left moves Left. Right, Right. So on. `OK` will Fire. `6` will unload.
 2. **Just Say No Mode**: Everything results in a head shake.
-2. **Opposite Mode**: Basic mode, but in reverse.
+3. **Opposite Mode**: Basic mode, but in reverse.
+4. **Roulette Mode**: Rotates in a circle and randomly fires.
 
 # Adding a mode
 
@@ -39,6 +40,5 @@ Now that you have your mode created you need to `include` it in the `code/modes.
 
 # TODO
 
-- [ ] Add roulette mode from original code
 - [ ] Add "program" mode so users can record their own IR sequences and then run them
 - [ ] Add "clock" mode where the turret turns with the time
