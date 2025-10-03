@@ -22,3 +22,11 @@ jobs:
 
       - name: Compile sketch
         run: make compile
+
+      - name: Install Clang
+        run: |
+          sudo apt update
+          sudo apt install clang-format-21
+
+      - name: clang-format check
+        run: make format-check
