@@ -6,12 +6,9 @@
 #include <IRremote.hpp>
 #include "./ir-codes.h"
 #include "./movement.h"
-#include "./mode-defs.h"
+#include "./mode-mgmt.h"
 #include "./commands.h"
-#include "./password-mode.h"
-#include "./direct-mode.h"
-#include "./just-no-mode.h"
-#include "./oppisite-mode.h"
+#include "./modes.h"
 
 //////////////////////////////////////////////////
                 //  S E T U P  //
@@ -41,6 +38,8 @@ void setup() {
   Serial.println(F("at pin 9"));
 
   homeServos(); //set servo motors to home position
+  
+  processModeRegistration();
 }
 
 //////////////////////////////////////////////////
