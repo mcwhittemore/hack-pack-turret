@@ -1,9 +1,9 @@
-#include "./modes/direct-mode.h"
-#include "./modes/just-no-mode.h"
-#include "./modes/oppisite-mode.h"
+#include "./modes/direct.h"
+#include "./modes/just-say-no.h"
+#include "./modes/opposite.h"
 
 void processModeRegistration() {
   registerMode(handleDirectMode); // Mode 1
   registerMode(handleJustNoMode); // Mode 2
-  registerMode(handleOppisiteMode); // Mode 3
+  registerMode(handleOppositeMode); // Mode 3
 }

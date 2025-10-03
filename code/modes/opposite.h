@@ -1,5 +1,5 @@
 
-int handleOppisiteMode() {
+int handleOppositeMode() {
   switch (inputBuffer[0]) {
     case 'R':
       leftMove(1);

@@ -6,46 +6,39 @@ This repo contains my copy of code from the [Crunchlabs Turret Hack Pack](https:
 
 The goal of this project is to update the original code to be simpler to extend and modify by standardizing input management and "mode" selection and creating a framework for how to add new modes that use this input management system.
 
+# Running
+
+When you turn your turret on, you will need to enter the password. Success will get you a head nod. 
+
+After you unlock it you will be in `Direct Mode`. Later if you change mode and relock it, unlocking will bring you back to your last mode.
+
+To change modes press `#` and then enter the mode number in and follow it with another `#`. So, to switch to mode 2, press `#2#`. To go lock it, press `*`.
+
+# Supported Modes
+
+1. **Direct Mode**: Basic control. Left moves Left. Right, Right. So on. `OK` will Fire. `6` will unload.
+2. **Just Say No Mode**: Everything results in a head shake.
+2. **Opposite Mode**: Basic mode, but in reverse.
+
 # Adding a mode
 
-## Step 1: Register new mode with `./code/mode-defs.h`
+## Step 1: Create your new mode in the `code/modes` folder
 
-You need to add both a `#define` for your mode like `#define JUST_SAY_NO_MODE 1`. All the modes must be in order and the first mode must be 1. You also need to define the name of your mode "handler" like `int handleJustSayNo();`.
-
-## Step 2: Implement logic in new `code/*-mode.h` file
-
-Create a new file and fill out your mode "handler" function here. For our "just say no" mode, we create `just-say-no-mode.h` and implement the logic there.
+A mode is just a function that returns a `bool`. The return value impacts if the input buffer is kept or cleared. To make it easier to remember this we’ve provided a `CLEAR_INPUT_BUFFER` and `KEEP_INPUT_BUFFER` constant that you can return instead.
 
 ```c
-int handleJustSayNo() {
+bool handleJustSayNo() {
   shakeHeadNo();
-  return -1;
+  return CLEAR_INPUT_BUFFER;
 }
 ```
 
-Note: The name of the function here does not matter. It can be whatever you want. It must match across all 3 steps though.
+## Step 2: Register your mode with `code/modes.h`
 
-## Step 3: Register your mode in `./code/commands.h`
-
-You need to add both an `#include` for your new mode file and an if block to the mode handler list.
-
-```c
-#include "./just-say-no-mode.h"
-
-// ...
-
-if (mode == PASSWORD_MODE) {
-    modeResult = handlePasswordMode();
-} else if (mode == DIRECT_MODE) {
-    modeResult = handleDirectMode();
-} else if (mode == JUST_SAY_NO_MODE) {
-    modeResult = handleJustSayNo();
-}
-```
+Now that you have your mode created you need to `include` it in the `code/modes.h` file. To do this first you add `#include “./modes/your-mode-name.h"` to the top of the file. And then you add `registerMode(handleYourMode)` to the `processModeRegistration` function. The order of the `registerMode` calls defines the mode number. 
 
 # TODO
 
 - [ ] Add roulette mode from original code
 - [ ] Add "program" mode so users can record their own IR sequences and then run them
 - [ ] Add "clock" mode where the turret turns with the time
-- [ ] Improve mode return values to be more extensible
