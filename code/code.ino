@@ -48,11 +48,11 @@ void setup() {
 //  L O O P  //
 //////////////////////////////////////////////////
 void loop() {
-  if (IrReceiver.decode()) { // if we have recieved a comman this loop...
-    int command = IrReceiver.decodedIRData.command; // store it in a variable
-    IrReceiver.resume(); // Enable receiving of the next value
-    handleCommand(
-        command); // Handle the received command through switch statements
+  if (IrReceiver.decode()) {
+    int command = IrReceiver.decodedIRData.command;
+    IrReceiver.resume();
+    handleCommand(command);
   }
+  loopCommand();
   delay(5); // delay for smoothness
 }

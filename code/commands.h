@@ -44,12 +44,12 @@ void handleCommand(int command) {
   bool added = addToInputBuffer(toAdd);
   if (!added) {
     Serial.println("Failed to add command to input buffer.");
-    shakeHeadNo();
     bufferIndex = 0;       // Reset buffer index
     inputBuffer[0] = '\0'; // Clear the input buffer
-    return;
   }
+}
 
+void loopCommand() {
   bool modeResult = CLEAR_INPUT_BUFFER;
   if (!passcodeEntered) {
     modeResult = checkPasscode();

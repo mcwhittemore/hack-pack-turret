@@ -34,7 +34,7 @@ int yawPrecision =
          // will remain at it's set movement speed. Try values between 50 and
          // 500 to start (500 milliseconds = 1/2 second)
 int rollPrecision =
-    158; // this variable represents the time in milliseconds that the ROLL
+    300; // this variable represents the time in milliseconds that the ROLL
          // motor with remain at it's set movement speed. If this ROLL motor is
          // spinning more or less than 1/6th of a rotation when firing a single
          // dart (one call of the fire(); command) you can try adjusting this
@@ -118,7 +118,7 @@ void fire() { // function for firing a single dart
 
 void fireAll() { // function to fire all 6 darts at once
   rollServo.write(rollStopSpeed + rollMoveSpeed); // start rotating the servo
-  delay(rollPrecision * 12);      // time for 360 degrees of rotation
+  delay(rollPrecision * 9);       // time for 360 degrees of rotation
   rollServo.write(rollStopSpeed); // stop rotating the servo
   delay(5);                       // delay for smoothness
   Serial.println("FIRING ALL");

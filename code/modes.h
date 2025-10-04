@@ -3,6 +3,7 @@
 #include "./modes/opposite.h"
 #include "./modes/program.h"
 #include "./modes/roulette.h"
+#include "./modes/timmer.h"
 
 void processModeRegistration() {
   registerMode(handleDirectMode);   // Mode 1
@@ -10,4 +11,5 @@ void processModeRegistration() {
   registerMode(handleOppositeMode); // Mode 3
   registerMode(handleRouletteMode); // Mode 4
   registerMode(handleProgramMode);  // Mode 5
+  registerMode(handleTimmerMode);   // Mode 6
 }
