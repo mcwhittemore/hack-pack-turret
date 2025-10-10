@@ -62,6 +62,7 @@ void loopCommand() {
   } else if (inputBuffer[bufferIndex - 1] == '*') {
     modeResult = CLEAR_INPUT_BUFFER;
     passcodeEntered = false;
+    modeCheck++; // Increment modeCheck to signal mode change
   } else {
     modeResult = runActiveMode();
   }
