@@ -1,3 +1,7 @@
+int rouletteModeCheck = 0;
+int rouletteDartsFired = 0;
+bool rouletteRunning = false;
+
 void runRoulette() {
   Serial.println("ENTERING ROULETTE MODE");
   // unsigned long startTime = millis();
