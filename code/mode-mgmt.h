@@ -6,6 +6,7 @@ typedef bool (*FunctionPtr)();
 #define MAX_MODES 20
 int modeCount = 0;
 int activeMode = 0;
+int modeCheck = 1;
 FunctionPtr modeHandlers[MAX_MODES];
 
 void registerMode(FunctionPtr func) {
@@ -37,6 +38,7 @@ bool setMode(char *inputBuffer) {
   int mode = atoi(hold) - 1;
   if (mode >= 0 && mode < modeCount) {
     activeMode = mode;
+    modeCheck++; // Increment modeCheck to signal mode change
     Serial.print("Mode set to ");
     Serial.println(activeMode + 1);
     return true;
