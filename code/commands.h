@@ -67,10 +67,7 @@ void loopCommand() {
   }
 
   if (modeResult == CLEAR_INPUT_BUFFER) {
-    Serial.println("Complete. Resetting buffer.");
     bufferIndex = 0;       // Reset buffer index
     inputBuffer[0] = '\0'; // Clear the input buffer
-  } else {
-    Serial.println("Awaiting more input...");
   }
 }
