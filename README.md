@@ -21,6 +21,7 @@ To change modes press `#` and then enter the mode number in and follow it with a
 3. **Opposite Mode**: Basic mode, but in reverse.
 4. **Roulette Mode**: Rotates in a circle and randomly fires.
 5. **Program Mode**: Lets you record a sequence of commands and then play them back.
+6. **Timer Mode**: Type in a number of minutes and hit `OK`. The turret will wait that many minutes and then fire.
 
 # Adding a mode
 
