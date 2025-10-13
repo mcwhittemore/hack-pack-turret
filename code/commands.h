@@ -27,19 +27,22 @@ bool checkPasscode() {
 
 void handleCommand(int command) {
   // this checks to see if the command is a repeat
-  if ((IrReceiver.decodedIRData.flags & IRDATA_FLAGS_IS_REPEAT) &&
-      !isCommandADirection(command)) {
+  bool isRepeat = (IrReceiver.decodedIRData.flags & IRDATA_FLAGS_IS_REPEAT);
+  if (isRepeat && !isCommandADirection(command)) {
     Serial.println("DEBOUNCING REPEATED NUMBER - IGNORING INPUT");
     return; // discarding the repeated numbers prevent you from accidentally
             // inputting a number twice
   }
 
-  beep(SOUND_A, 125); // beep to confirm command received
+  if (isRepeat == false) {
+    beep(SOUND_A, SOUND_TN);
+  }
 
   char toAdd = commandToCharacter(command);
 
   if (toAdd == '\0') {
-    Serial.println("Unrecognized command, ignoring.");
+    Serial.print("Unrecognized command, ignoring ");
+    Serial.println(command, HEX);
     return; // Ignore unrecognized commands
   }
 
@@ -58,6 +61,7 @@ void loopCommand() {
   } else if (inputBuffer[0] == '#') {
     if (bufferIndex > 1 && inputBuffer[bufferIndex - 1] == '#') {
       modeResult = setMode(inputBuffer);
+      PLAY_SOUND(SOUND_MODE_CHANGE);
     } else {
       modeResult = KEEP_INPUT_BUFFER;
     }
@@ -65,6 +69,7 @@ void loopCommand() {
     modeResult = CLEAR_INPUT_BUFFER;
     passcodeEntered = false;
     modeCheck++; // Increment modeCheck to signal mode change
+    PLAY_SOUND(SOUND_PASSWORD);
   } else {
     modeResult = runActiveMode();
   }

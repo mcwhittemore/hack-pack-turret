@@ -45,7 +45,7 @@ void setup() {
   processModeRegistration();
 
   setupSound();
-  PLAY_SOUND(SOUND_HELLO);
+  PLAY_SOUND(SOUND_START);
 }
 
 //////////////////////////////////////////////////
