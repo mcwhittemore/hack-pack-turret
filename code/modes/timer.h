@@ -26,6 +26,7 @@ bool handleTimerMode() {
   }
 
   if (timerRunning && (millis() - timerStart >= 1000)) {
+    beep(SOUND_C, SOUND_EN);
     timerStart += 1000;
     timerSecondsPassed++;
     if (timerSecondsPassed % 10 == 0) {

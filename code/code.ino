@@ -8,6 +8,7 @@
 #include "./ir-codes.h"
 #include "./movement.h"
 #include "./mode-mgmt.h"
+#include "./sound.h"
 #include "./commands.h"
 #include "./modes.h"
 
@@ -42,6 +43,9 @@ void setup() {
   homeServos(); // set servo motors to home position
 
   processModeRegistration();
+
+  setupSound();
+  PLAY_SOUND(SOUND_START);
 }
 
 //////////////////////////////////////////////////
