@@ -34,6 +34,8 @@ void handleCommand(int command) {
             // inputting a number twice
   }
 
+  beep(SOUND_A, 125); // beep to confirm command received
+
   char toAdd = commandToCharacter(command);
 
   if (toAdd == '\0') {
