@@ -40,6 +40,10 @@ bool handleJustSayNo() {
 
 Now that you have your mode created you need to `include` it in the `code/modes.h` file. To do this first you add `#include “./modes/your-mode-name.h"` to the top of the file. And then you add `registerMode(handleYourMode)` to the `processModeRegistration` function. The order of the `registerMode` calls defines the mode number. 
 
-# TODO
+# Sound
 
-- [ ] Add "clock" mode where the turret turns with the time
+The turret has a small speaker that can be used to play sounds. To add a speaker to your project connect it to pin 2 (D2) and ground. Personally I've used one with a switch in the line so that I can turn it off when I don't want sound.
+
+The `beep` function takes a note (see `code/sound.h` for available notes) and a duration in milliseconds. The `SOUND_XN` constants provide length shortcuts for common durations that are based on a 120 BPM tempo in 4/4 time. The `SOUND_WN` will give you a `whole note` and `SOUND_QN` will give you a `quarter note`.
+
+To play a series of notes you can use `PLAY_SOUND(your_sound_name)` which will play an array of notes and durations. Included sounds are stored in the `code/sounds` folder. Each sound is a `.h` file that contains an array of notes and durations.
